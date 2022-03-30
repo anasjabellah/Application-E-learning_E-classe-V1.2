@@ -11,3 +11,21 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 
 });
+
+function moddalForm(){
+    document.getElementById("modelparent").style.display = "block";
+    document.getElementById("modelparent").style.display = "flex";
+}
+
+function close(){
+    document.getElementById("model_parent").style.display = "none"; 
+}
+
+function moddalFormCourse(){
+    document.getElementById("modelparent").style.display = "block";
+    document.getElementById("modelparent").style.display = "flex";
+}
+
+function closeCourse(){
+    document.getElementById("model_parent").style.display = "none"; 
+}

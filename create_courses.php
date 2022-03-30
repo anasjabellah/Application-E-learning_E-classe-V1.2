@@ -10,8 +10,7 @@
         $signed_at = trim($_POST["signed_at"]);
 
         $query = "INSERT INTO courses(name, time, signed_by, signed_at) values('$name','$time', '$signed_by','$signed_at ')";
-        mysqli_query($link,$query);
-            
+        mysqli_query($link,$query);            
     }
 ?>
 
@@ -41,25 +40,25 @@
 
                         <div class="form-group">
                             <label>name</label>
-                            <input type="text" name="name" class="form-control"  >
+                            <input type="text" name="name" id="name" class="form-control"  >
                             <span class="invalid-feedback"></span>
                         </div>
 
                         <div class="form-group">
                             <label>time</label>
-                            <input name="time" class="form-control"  ></input>
+                            <input name="time" class="form-control" id="time"  ></input>
                             <span class="invalid-feedback"></span>
                         </div>
 
                         <div class="form-group">
                             <label>signed by</label>
-                            <input type="text" name="signed_by" class="form-control "  >
+                            <input type="text" name="signed_by" class="form-control id="signed_by"  >
                             <span class="invalid-feedback"></span>
                         </div>
 
                         <div class="form-group">
                             <label>signed at</label>
-                            <input type="text" name="signed_at" class="form-control" >
+                            <input type="text" name="signed_at" class="form-control" id="signed_at" >
                             <span class="invalid-feedback"></span>
                         </div>
 

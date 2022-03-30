@@ -2,11 +2,12 @@
 
   if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-
     if(isset($_POST["email"]) && isset($_POST["password"])){
 
 
       require_once "data/config.php";
+
+
 
       $email = $_POST["email"];
       $password = hash('sha256', $_POST["password"]) ;
@@ -21,6 +22,16 @@
            $_SESSION['id'] = $rsl['id'];
            $_SESSION['username'] = $rsl['username'];
            $_SESSION['gmail'] = $rsl['email'];
+           $_SESSION['password'] = $rsl['password'];
+
+          if (isset($_POST['remember'])){
+
+            setcookie('gmail',$email,time()+10);
+            setcookie('password', $_POST["password"] ,time()+10);
+
+          }
+
+
            header('Location: index.php');
        }
 
@@ -65,27 +76,32 @@
                           Enter your credentials to access your account 
                       </p>
                   </div>
-                  <form method="POST">
+                  <form method="POST" id='formEl'>
                       <div class="p-4">
                           <div class="mb-3">
                               <label for="email" class="form-label">Email</label>
-                              <input type="text" class="form-control" placeholder="Enter your email" id="email" name="email">
+                              <input type="text" class="form-control" placeholder="Enter your email" id="emaillogin" name="email" value="<?php  if(isset($_COOKIE['gmail'])){ 
+                                echo $_COOKIE['gmail']  ;
+                               }  
+                                ?>">
+                                <div class="text-danger errorEmail"></div>
                           </div>
                           <div class="mb-3">
                               <label for="password" class="form-label">Password</label>
-                              <input type="password" class="form-control" placeholder="Enter your password" id="password" name="password">
+                              <input type="password" class="form-control" placeholder="Enter your password" id="e_passwordlogin" name="password" value="<?php  if(isset($_COOKIE['password'])){
+                                    echo $_COOKIE['password'] ;
+                              }  ?>">
+                              <div class="text-danger errorPassword"></div>
+                          </div>
+
+                          <div class="mb-3 d-flex align-items-center">
+                              <input type="checkbox"  name="remember"  <?php if(isset($_COOKIE['gmail'])){?>  checked  <?php } ?>  >
+                              <label class="text-muted ms-2" >remember me</label>
                           </div>
 
                           <div class="d-grid gap-2">
-                            <input class="btn btn-info text-capitalize text-white" type="submit" value="SIGN IN">
-                          </div>
-
-
-                          <div class="d-flex justify-content-around mt-2">
-                            <p class=" text-muted ">
-                              Forgot your password?
-                            </p>
-                            <a class="bg-link" href="#">Reset password</a>
+                            <input class="btn btn-info text-capitalize text-white" type="submit" value="SIGN IN" id="sign_in_login ">
+                            <a href="sign_in.php" class="btn btn-secondary text-decoration-none">Sign Up</a>
                           </div>
 
                           <?php  if(isset($erre)){ echo  $erre ; }   ?>
@@ -98,5 +114,6 @@
     </main>
  
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/validate.js"></script>
   </body>
   </html>
